@@ -15,11 +15,8 @@ const config: DataSourceOptions = {
   password: `${process.env[EnvVariables.dbPassword]}`,
   database: `${process.env[EnvVariables.dbName]}`,
   entities: [join(__dirname, '../**/**', '*.entity.{ts,js}')],
-  // migrations: ['dist/migrations/*{.ts,.js}'],
+  migrations: [join(__dirname, '../migrations/*')],
   synchronize: false,
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  // autoLoadEntities: true,
 };
 
 export default registerAs(ConfigServiceNames.typeorm, () => config);
