@@ -1,13 +1,19 @@
 import { Module } from '@nestjs/common';
+import { ItemModule } from './models/item/item.module';
+import { DatabaseModule } from './database/database.module';
+import { ConfigModule } from '@nestjs/config';
+import typeorm from './config/typeorm';
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ItemModule } from './item/item.module';
-import { Datasource } from './datasource/datasource';
-import { DataSource } from './data-source/data-source';
 
 @Module({
-  imports: [ItemModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true, load: [typeorm] }),
+    ItemModule,
+    DatabaseModule,
+  ],
   controllers: [AppController],
-  providers: [AppService, Datasource, DataSource],
+  providers: [AppService],
 })
 export class AppModule {}
