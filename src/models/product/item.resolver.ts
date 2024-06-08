@@ -1,4 +1,9 @@
-import { Resolver } from '@nestjs/graphql';
+import { Resolver, Query } from '@nestjs/graphql';
 
 @Resolver()
-export class ItemResolver {}
+export class ItemResolver {
+  @Query(() => [String], { name: 'some' })
+  some() {
+    return '';
+  }
+}
